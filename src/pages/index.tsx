@@ -1,10 +1,13 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import { ArrowRight, ShoppingBag, GraduationCap, Star } from 'lucide-react'
+import { ArrowRight, Sparkles, Scissors, Heart, MessageCircle, Mail, MapPin } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 
 const Header = dynamic(() => import('@/components/layout/Header').then(mod => mod.Header), { ssr: false })
+
+// Numéro WhatsApp - À remplacer par le vrai numéro
+const WHATSAPP_NUMBER = '213XXXXXXXXX'
 
 // Disable static generation
 export const getServerSideProps = async () => {
@@ -15,10 +18,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>L'univers de Samira - Boutique & Formation</title>
+        <title>L'univers de Samira - Sacs Faits Main | Alger</title>
         <meta
           name="description"
-          content="Découvrez notre boutique en ligne et nos formations exclusives. L'univers de Samira vous accompagne dans votre développement."
+          content="Des sacs faits main, pensés pour vous. Créations uniques en cuir, crochet et tissus. Cours de couture et crochet à Alger."
         />
       </Head>
 
@@ -26,91 +29,242 @@ export default function Home() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-primary-50 to-secondary-50 py-20 lg:py-32">
+        <section className="relative bg-gradient-to-br from-amber-50 to-orange-50 py-20 lg:py-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-                Bienvenue dans
-                <span className="text-primary-600"> L'univers de Samira</span>
+              <p className="text-amber-600 font-semibold tracking-widest uppercase mb-4">
+                CRÉER. PARTAGER. INSPIRER.
+              </p>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                L'univers de
+                <span className="text-rose-800"> Samira</span>
               </h1>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-                Découvrez notre sélection unique de produits et nos formations
-                exclusives pour développer vos compétences.
+                Des sacs faits main, pensés pour vous.<br />
+                <span className="text-rose-700 font-medium">Pièces uniques</span> créées avec passion à Alger.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/shop">
-                  <Button size="lg" className="w-full sm:w-auto">
-                    <ShoppingBag className="w-5 h-5 mr-2" />
-                    Explorer la boutique
+                  <Button size="lg" className="w-full sm:w-auto bg-rose-800 hover:bg-rose-900">
+                    <Sparkles className="w-5 h-5 mr-2" />
+                    Découvrir les créations
                   </Button>
                 </Link>
-                <Link href="/formation">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                    <GraduationCap className="w-5 h-5 mr-2" />
-                    Voir les formations
+                <a
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour, je souhaite passer une commande`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-rose-800 text-rose-800 hover:bg-rose-50">
+                    <MessageCircle className="w-5 h-5 mr-2" />
+                    Commander sur WhatsApp
                   </Button>
-                </Link>
+                </a>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Features */}
+        {/* Créations vedettes */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center p-6">
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <ShoppingBag className="w-8 h-8 text-primary-600" />
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-3xl font-bold text-gray-900 mb-4">
+                Sacs & Créations
+              </h2>
+              <p className="text-gray-600 max-w-xl mx-auto">
+                Chaque sac est une pièce unique, confectionnée à la main avec des matériaux de qualité.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {/* Bordeaux Fleuri */}
+              <div className="group relative overflow-hidden rounded-2xl shadow-lg aspect-square">
+                <div className="absolute inset-0 bg-gradient-to-br from-rose-700 to-rose-900 flex items-center justify-center">
+                  <span className="text-7xl">👜</span>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Boutique en ligne</h3>
-                <p className="text-gray-600">
-                  Des produits soigneusement sélectionnés pour vous accompagner au quotidien.
-                </p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-5">
+                  <span className="text-amber-400 text-sm font-medium">01</span>
+                  <h3 className="text-white font-semibold text-lg">Bordeaux Fleuri</h3>
+                  <p className="text-gray-300 text-sm">Cuir avec broderies florales</p>
+                </div>
               </div>
 
-              <div className="text-center p-6">
-                <div className="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <GraduationCap className="w-8 h-8 text-secondary-600" />
+              {/* Noir & Or */}
+              <div className="group relative overflow-hidden rounded-2xl shadow-lg aspect-square">
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black flex items-center justify-center">
+                  <span className="text-7xl">✨</span>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Formations complètes</h3>
-                <p className="text-gray-600">
-                  Des cours vidéo et tutoriels pour développer vos compétences à votre rythme.
-                </p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-5">
+                  <span className="text-amber-400 text-sm font-medium">02</span>
+                  <h3 className="text-white font-semibold text-lg">Noir & Or</h3>
+                  <p className="text-gray-300 text-sm">Élégance intemporelle</p>
+                </div>
               </div>
 
-              <div className="text-center p-6">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Star className="w-8 h-8 text-green-600" />
+              {/* Crochet Brun */}
+              <div className="group relative overflow-hidden rounded-2xl shadow-lg aspect-square">
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-700 to-amber-900 flex items-center justify-center">
+                  <span className="text-7xl">🧶</span>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Qualité garantie</h3>
-                <p className="text-gray-600">
-                  Un accompagnement personnalisé et un service client à votre écoute.
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-5">
+                  <span className="text-amber-400 text-sm font-medium">03</span>
+                  <h3 className="text-white font-semibold text-lg">Crochet Brun</h3>
+                  <p className="text-gray-300 text-sm">Fait main au crochet</p>
+                </div>
+              </div>
+
+              {/* Reflets Argentés */}
+              <div className="group relative overflow-hidden rounded-2xl shadow-lg aspect-square">
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center">
+                  <span className="text-7xl">💎</span>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-5">
+                  <span className="text-amber-400 text-sm font-medium">04</span>
+                  <h3 className="text-white font-semibold text-lg">Reflets Argentés</h3>
+                  <p className="text-gray-300 text-sm">Finitions métalliques</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center mt-10">
+              <Link href="/shop">
+                <Button variant="outline" className="border-rose-800 text-rose-800 hover:bg-rose-50">
+                  Voir toutes les créations
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Sur Mesure */}
+        <section className="py-16 bg-amber-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <span className="text-amber-600 font-semibold tracking-wider uppercase text-sm">Personnalisation</span>
+                <h2 className="font-serif text-3xl font-bold text-gray-900 mt-2 mb-4">
+                  Créations Sur Mesure
+                </h2>
+                <p className="text-gray-600 mb-6">
+                  Dites-moi vos envies, vos couleurs, votre occasion.
+                  Je crée pour vous un sac unique qui vous ressemble.
                 </p>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center gap-3">
+                    <Heart className="w-5 h-5 text-rose-700 flex-shrink-0" />
+                    <span>Choix des couleurs et matières</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Heart className="w-5 h-5 text-rose-700 flex-shrink-0" />
+                    <span>Dimensions personnalisées</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Heart className="w-5 h-5 text-rose-700 flex-shrink-0" />
+                    <span>Broderies et détails sur demande</span>
+                  </li>
+                </ul>
+                <a
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour, je souhaite commander un sac sur mesure`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button className="bg-rose-800 hover:bg-rose-900">
+                    <MessageCircle className="w-5 h-5 mr-2" />
+                    Demander un devis
+                  </Button>
+                </a>
+              </div>
+              <div className="bg-gradient-to-br from-rose-100 to-amber-100 rounded-3xl aspect-square flex items-center justify-center shadow-lg">
+                <span className="text-9xl">🎨</span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-16 bg-primary-600">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Prêt à commencer ?
-            </h2>
-            <p className="text-primary-100 text-lg mb-8 max-w-xl mx-auto">
-              Rejoignez notre communauté et accédez à du contenu exclusif.
-            </p>
-            <Link href="/auth/register">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="bg-white text-primary-600 hover:bg-gray-100"
+        {/* Cours */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <span className="text-amber-600 font-semibold tracking-wider uppercase text-sm">Apprendre</span>
+              <h2 className="font-serif text-3xl font-bold text-gray-900 mt-2 mb-4">
+                Transmettre le Savoir-Faire
+              </h2>
+              <p className="text-gray-600 max-w-xl mx-auto">
+                Apprenez l'art de la couture et du crochet. Aucun niveau requis.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-amber-50 rounded-2xl p-8 text-center hover:shadow-lg transition-shadow">
+                <div className="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Scissors className="w-8 h-8 text-rose-700" />
+                </div>
+                <h3 className="font-semibold text-xl mb-2">Couture</h3>
+                <p className="text-gray-600 text-sm">
+                  Les bases de la couture à la machine et à la main.
+                </p>
+              </div>
+
+              <div className="bg-amber-50 rounded-2xl p-8 text-center hover:shadow-lg transition-shadow">
+                <div className="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-3xl">✂️</span>
+                </div>
+                <h3 className="font-semibold text-xl mb-2">Coupe</h3>
+                <p className="text-gray-600 text-sm">
+                  Apprenez à créer vos propres patrons.
+                </p>
+              </div>
+
+              <div className="bg-amber-50 rounded-2xl p-8 text-center hover:shadow-lg transition-shadow">
+                <div className="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-3xl">🧶</span>
+                </div>
+                <h3 className="font-semibold text-xl mb-2">Crochet</h3>
+                <p className="text-gray-600 text-sm">
+                  Techniques de base et création de sacs.
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center mt-10">
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour, je souhaite réserver une place pour un cours`}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Créer un compte gratuit
-                <ArrowRight className="w-5 h-5 ml-2" />
+                <Button className="bg-amber-600 hover:bg-amber-700 text-white">
+                  Réserver une place
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Contact */}
+        <section className="py-16 bg-rose-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
+              Une idée, une question, un cadeau à offrir ?
+            </h2>
+            <p className="text-rose-200 text-lg mb-8 max-w-xl mx-auto">
+              Contactez-moi sur WhatsApp pour discuter de votre projet.
+            </p>
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour Samira !`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button
+                size="lg"
+                className="bg-white text-rose-800 hover:bg-gray-100"
+              >
+                <MessageCircle className="w-5 h-5 mr-2" />
+                Discuter sur WhatsApp
               </Button>
-            </Link>
+            </a>
           </div>
         </section>
       </main>
@@ -119,39 +273,46 @@ export default function Home() {
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h4 className="font-display text-xl font-bold mb-4">L'univers de Samira</h4>
-              <p className="text-gray-400 text-sm">
-                Votre destination pour les produits de qualité et les formations en ligne.
+            <div className="md:col-span-2">
+              <h4 className="font-serif text-xl font-bold mb-4">L'univers de Samira</h4>
+              <p className="text-gray-400 text-sm mb-4">
+                Des sacs faits main, pensés pour vous. Pièces uniques créées avec passion à Alger.
               </p>
+              <div className="flex gap-4">
+                <a
+                  href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                </a>
+                <a href="mailto:contact@luniversdesamira.com" className="text-gray-400 hover:text-white">
+                  <Mail className="w-5 h-5" />
+                </a>
+              </div>
             </div>
             <div>
               <h5 className="font-semibold mb-4">Boutique</h5>
               <ul className="space-y-2 text-gray-400 text-sm">
-                <li><Link href="/shop" className="hover:text-white">Tous les produits</Link></li>
-                <li><Link href="/shop/new" className="hover:text-white">Nouveautés</Link></li>
-                <li><Link href="/shop/promo" className="hover:text-white">Promotions</Link></li>
+                <li><Link href="/shop" className="hover:text-white">Toutes les créations</Link></li>
+                <li><Link href="/shop#surmesure" className="hover:text-white">Sur mesure</Link></li>
               </ul>
             </div>
             <div>
-              <h5 className="font-semibold mb-4">Formation</h5>
+              <h5 className="font-semibold mb-4">Formations</h5>
               <ul className="space-y-2 text-gray-400 text-sm">
-                <li><Link href="/formation" className="hover:text-white">Tous les cours</Link></li>
-                <li><Link href="/formation/free" className="hover:text-white">Cours gratuits</Link></li>
-                <li><Link href="/formation/certificates" className="hover:text-white">Certificats</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="font-semibold mb-4">Aide</h5>
-              <ul className="space-y-2 text-gray-400 text-sm">
-                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-                <li><Link href="/faq" className="hover:text-white">FAQ</Link></li>
-                <li><Link href="/legal" className="hover:text-white">Mentions légales</Link></li>
+                <li><Link href="/formation" className="hover:text-white">Couture</Link></li>
+                <li><Link href="/formation" className="hover:text-white">Crochet</Link></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
-            © {new Date().getFullYear()} L'univers de Samira. Tous droits réservés.
+          <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
+            <div className="flex items-center gap-2 mb-4 md:mb-0">
+              <MapPin className="w-4 h-4" />
+              <span>Alger, Algérie</span>
+            </div>
+            <div>© {new Date().getFullYear()} L'univers de Samira. Tous droits réservés.</div>
           </div>
         </div>
       </footer>

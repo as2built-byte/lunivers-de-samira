@@ -9,30 +9,37 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Palette L'univers de Samira
+        // Palette L'univers de Samira - Sacs faits main
         primary: {
-          50: '#fdf4ff',
-          100: '#fae8ff',
-          200: '#f5d0fe',
-          300: '#f0abfc',
-          400: '#e879f9',
-          500: '#d946ef',  // Couleur principale
-          600: '#c026d3',
-          700: '#a21caf',
-          800: '#86198f',
-          900: '#701a75',
+          50: '#fdf2f4',
+          100: '#fce7ea',
+          200: '#f9d0d9',
+          300: '#f4a9b8',
+          400: '#ec7691',
+          500: '#722f37',  // Bordeaux - Couleur principale
+          600: '#6b2830',
+          700: '#5c2128',
+          800: '#4d1c22',
+          900: '#3d161b',
         },
         secondary: {
-          50: '#fff7ed',
-          100: '#ffedd5',
-          200: '#fed7aa',
-          300: '#fdba74',
-          400: '#fb923c',
-          500: '#f97316',  // Accent
-          600: '#ea580c',
-          700: '#c2410c',
-          800: '#9a3412',
-          900: '#7c2d12',
+          50: '#fefce8',
+          100: '#fef9c3',
+          200: '#fef08a',
+          300: '#fde047',
+          400: '#facc15',
+          500: '#d4af37',  // Or - Accent
+          600: '#b8960f',
+          700: '#a16207',
+          800: '#854d0e',
+          900: '#713f12',
+        },
+        cream: {
+          50: '#fefdfb',
+          100: '#fdf8f3',
+          200: '#faf0e6',  // Crème pour les fonds
+          300: '#f5e6d3',
+          400: '#e8d4bc',
         },
       },
       fontFamily: {
