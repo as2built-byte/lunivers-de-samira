@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(git:*)",
+      "Bash(pnpm:*)",
+      "Bash(playwright:*)",
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep"
+    ],
+    "deny": []
+  },
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "hooks": {
+    "pre-commit": {
+      "command": "npm run lint && npm run test"
+    }
+  }
+}
