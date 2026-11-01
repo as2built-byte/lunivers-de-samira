@@ -1,0 +1,123 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Fonction helper pour vérifier si l'utilisateur est connecté
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Fonction helper pour vérifier si c'est le propriétaire
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Fonction helper pour vérifier si admin
+    function isAdmin() {
+      return isAuthenticated() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // ============================================
+    // UTILISATEURS
+    // ============================================
+    match /users/{userId} {
+      // Lecture : propriétaire ou admin
+      allow read: if isOwner(userId) || isAdmin();
+      // Création : utilisateur authentifié créant son propre profil
+      allow create: if isOwner(userId);
+      // Mise à jour : propriétaire (sans changer le rôle) ou admin
+      allow update: if isOwner(userId) && !('role' in request.resource.data) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ============================================
+    // PRODUITS
+    // ============================================
+    match /products/{productId} {
+      // Lecture : tout le monde peut voir les produits publiés
+      allow read: if resource.data.published == true || isAdmin();
+      // Écriture : admin seulement
+      allow write: if isAdmin();
+    }
+
+    // ============================================
+    // CATÉGORIES
+    // ============================================
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ============================================
+    // COMMANDES
+    // ============================================
+    match /orders/{orderId} {
+      // Lecture : propriétaire ou admin
+      allow read: if isAuthenticated() &&
+        (resource.data.userId == request.auth.uid || isAdmin());
+      // Création : utilisateur authentifié
+      allow create: if isAuthenticated() &&
+        request.resource.data.userId == request.auth.uid;
+      // Mise à jour : admin seulement (pour changer le statut)
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ============================================
+    // COURS
+    // ============================================
+    match /courses/{courseId} {
+      // Lecture : cours publiés ou admin
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+
+      // Chapitres
+      match /chapters/{chapterId} {
+        allow read: if get(/databases/$(database)/documents/courses/$(courseId)).data.published == true || isAdmin();
+        allow write: if isAdmin();
+      }
+    }
+
+    // ============================================
+    // CHAPITRES (collection séparée)
+    // ============================================
+    match /chapters/{chapterId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // ============================================
+    // LEÇONS
+    // ============================================
+    match /lessons/{lessonId} {
+      // Lecture : leçons gratuites pour tous, autres pour inscrits
+      allow read: if resource.data.isFree == true || isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // ============================================
+    // INSCRIPTIONS AUX COURS
+    // ============================================
+    match /enrollments/{enrollmentId} {
+      allow read: if isAuthenticated() &&
+        resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated() &&
+        request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() &&
+        resource.data.userId == request.auth.uid;
+      allow delete: if isAdmin();
+    }
+
+    // ============================================
+    // AVIS / REVIEWS
+    // ============================================
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update, delete: if isAuthenticated() &&
+        resource.data.userId == request.auth.uid;
+    }
+  }
+}
