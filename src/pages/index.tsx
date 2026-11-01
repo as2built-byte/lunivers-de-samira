@@ -1,8 +1,15 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { ArrowRight, ShoppingBag, GraduationCap, Star } from 'lucide-react'
-import { Header } from '@/components/layout/Header'
 import { Button } from '@/components/ui/Button'
+
+const Header = dynamic(() => import('@/components/layout/Header').then(mod => mod.Header), { ssr: false })
+
+// Disable static generation
+export const getServerSideProps = async () => {
+  return { props: {} }
+}
 
 export default function Home() {
   return (

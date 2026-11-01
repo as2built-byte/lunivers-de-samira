@@ -1,8 +1,15 @@
 import { useState } from 'react'
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 import { Search, Filter } from 'lucide-react'
-import { Header } from '@/components/layout/Header'
-import { CourseCard } from '@/components/formation/CourseCard'
+
+const Header = dynamic(() => import('@/components/layout/Header').then(mod => mod.Header), { ssr: false })
+const CourseCard = dynamic(() => import('@/components/formation/CourseCard').then(mod => mod.CourseCard), { ssr: false })
+
+// Disable static generation
+export const getServerSideProps = async () => {
+  return { props: {} }
+}
 
 // Données de démonstration
 const mockCourses = [

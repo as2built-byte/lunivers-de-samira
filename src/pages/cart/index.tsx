@@ -1,15 +1,30 @@
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { Trash2, Plus, Minus, ShoppingBag } from 'lucide-react'
-import { Header } from '@/components/layout/Header'
 import { Button } from '@/components/ui/Button'
-import { useCartStore } from '@/lib/store/cart'
+import { useCartStore, CartItem } from '@/lib/store/cart'
+
+const Header = dynamic(() => import('@/components/layout/Header').then(mod => mod.Header), { ssr: false })
+
+// Disable static generation for this page
+export const getServerSideProps = async () => {
+  return { props: {} }
+}
 
 export default function CartPage() {
+  const [mounted, setMounted] = useState(false)
+  const [cartItems, setCartItems] = useState<CartItem[]>([])
   const { items, removeItem, updateQuantity, totalPrice, clearCart } = useCartStore()
 
-  if (items.length === 0) {
+  useEffect(() => {
+    setMounted(true)
+    setCartItems(items)
+  }, [items])
+
+  if (!mounted || cartItems.length === 0) {
     return (
       <>
         <Head>
@@ -58,11 +73,11 @@ export default function CartPage() {
           {/* Liste des articles */}
           <div className="flex-1">
             <div className="bg-white rounded-lg shadow">
-              {items.map((item, index) => (
+              {cartItems.map((item, index) => (
                 <div
                   key={item.id}
                   className={`flex items-center gap-4 p-4 ${
-                    index !== items.length - 1 ? 'border-b' : ''
+                    index !== cartItems.length - 1 ? 'border-b' : ''
                   }`}
                 >
                   {/* Image */}

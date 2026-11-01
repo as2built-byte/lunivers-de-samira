@@ -2,12 +2,18 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  // Skip static 404/500 page generation
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
+
   images: {
     domains: [
       'localhost',
       'res.cloudinary.com', // Cloudinary
       'images.unsplash.com', // Unsplash pour les images de test
     ],
+    unoptimized: true,
   },
 
   // Redirections

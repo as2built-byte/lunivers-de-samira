@@ -1,14 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 import { Mail, Lock, User, Eye, EyeOff } from 'lucide-react'
-import { Header } from '@/components/layout/Header'
 import { Button } from '@/components/ui/Button'
 import { signUp, signInWithGoogle } from '@/lib/firebase/auth'
 
+const Header = dynamic(() => import('@/components/layout/Header').then(mod => mod.Header), { ssr: false })
+
 export default function RegisterPage() {
   const router = useRouter()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -19,6 +26,7 @@ export default function RegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!mounted) return
     setError('')
 
     // Validation
@@ -249,6 +257,11 @@ export default function RegisterPage() {
       </main>
     </>
   )
+}
+
+// Disable static generation for this page
+export const getServerSideProps = async () => {
+  return { props: {} }
 }
 
 function getErrorMessage(error: string): string {
