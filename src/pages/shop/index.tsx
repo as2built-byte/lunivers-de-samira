@@ -6,71 +6,65 @@ import { Button } from '@/components/ui/Button'
 
 const Header = dynamic(() => import('@/components/layout/Header').then(mod => mod.Header), { ssr: false })
 
-const WHATSAPP_NUMBER = '213XXXXXXXXX'
+// Numéro WhatsApp exact du site Framer
+const WHATSAPP_NUMBER = '213779949411'
 
-// Données des créations
+// Les 7 créations exactes du site Framer
 const creations = [
   {
     id: '01',
-    name: 'Bordeaux Fleuri',
-    description: 'Sac en cuir bordeaux avec broderies florales délicates',
-    price: 8500,
+    name: 'Bordeaux fleuri',
+    description: 'Sac bordeaux orné de fleurs et d\'une chaîne argentée',
     emoji: '👜',
-    gradient: 'from-rose-700 to-rose-900',
+    gradient: 'from-[#8a1c3f] to-[#5e0f2b]',
     available: true,
   },
   {
     id: '02',
-    name: 'Noir & Or',
-    description: 'Élégance intemporelle avec finitions dorées',
-    price: 9500,
+    name: 'Noir & or',
+    description: 'Sac noir avec fermoir et chaîne dorés',
     emoji: '✨',
     gradient: 'from-gray-800 to-black',
     available: true,
   },
   {
     id: '03',
-    name: 'Crochet Brun',
-    description: 'Sac fait main au crochet, style bohème',
-    price: 6500,
+    name: 'Crochet brun',
+    description: 'Sac au crochet, couleur brun chaleureux',
     emoji: '🧶',
     gradient: 'from-amber-700 to-amber-900',
     available: true,
   },
   {
     id: '04',
-    name: 'Reflets Argentés',
-    description: 'Sac de soirée avec finitions métalliques argentées',
-    price: 7500,
+    name: 'Reflets argentés',
+    description: 'Sac argenté avec fermoir élégant',
     emoji: '💎',
     gradient: 'from-gray-400 to-gray-600',
     available: true,
   },
   {
     id: '05',
-    name: 'Éclats Dorés',
-    description: 'Création luxueuse avec détails en or',
-    price: 11000,
+    name: 'Éclats dorés',
+    description: 'Sac doré brodé de fleurs',
     emoji: '🌟',
-    gradient: 'from-amber-500 to-amber-700',
-    available: false,
+    gradient: 'from-[#c9a25b] to-amber-700',
+    available: true,
   },
   {
     id: '06',
-    name: 'Rouge Texturé',
-    description: 'Sac en cuir texturé, couleur passion',
-    price: 8000,
+    name: 'Rouge texturé',
+    description: 'Sac rouge texturé avec anse et chaîne dorées',
     emoji: '❤️',
     gradient: 'from-red-600 to-red-800',
     available: true,
   },
   {
     id: '07',
-    name: 'Maille Scintillante',
-    description: 'Sac en maille avec fils scintillants',
-    price: 7000,
+    name: 'Maille scintillante',
+    description: 'Sac gris scintillant à anses métalliques',
     emoji: '✨',
-    gradient: 'from-purple-600 to-purple-800',
+    gradient: 'from-gray-500 to-gray-700',
     available: true,
   },
 ]
@@ -89,13 +83,6 @@ export default function ShopPage() {
     )
   }
 
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('fr-DZ', {
-      style: 'decimal',
-      minimumFractionDigits: 0,
-    }).format(price) + ' DA'
-  }
-
   return (
     <>
       <Head>
@@ -108,14 +95,14 @@ export default function ShopPage() {
 
       <Header />
 
-      <main className="bg-amber-50 min-h-screen">
+      <main className="bg-cream-50 min-h-screen">
         {/* Hero */}
-        <section className="bg-gradient-to-br from-rose-800 to-rose-900 text-white py-16">
+        <section className="bg-gradient-to-br from-primary-500 to-primary-700 text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
-              Nos Créations
+              Sacs & Créations
             </h1>
-            <p className="text-rose-200 text-lg max-w-2xl mx-auto">
+            <p className="text-primary-100 text-lg max-w-2xl mx-auto">
               Chaque sac est une pièce unique, confectionnée à la main avec amour.
             </p>
           </div>
@@ -144,7 +131,7 @@ export default function ShopPage() {
                     )}
 
                     {/* Numéro */}
-                    <div className="absolute top-3 right-3 text-amber-400 font-semibold">
+                    <div className="absolute top-3 right-3 text-secondary-500 font-semibold">
                       {item.id}
                     </div>
 
@@ -156,7 +143,7 @@ export default function ShopPage() {
                       <Heart
                         className={`w-5 h-5 ${
                           favorites.includes(item.id)
-                            ? 'fill-rose-500 text-rose-500'
+                            ? 'fill-primary-500 text-primary-500'
                             : 'text-gray-400'
                         }`}
                       />
@@ -168,26 +155,22 @@ export default function ShopPage() {
                     <h3 className="font-semibold text-lg text-gray-900 mb-1">
                       {item.name}
                     </h3>
-                    <p className="text-gray-500 text-sm mb-3 line-clamp-2">
+                    <p className="text-gray-500 text-sm mb-4 line-clamp-2">
                       {item.description}
                     </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-rose-800 font-bold text-lg">
-                        {formatPrice(item.price)}
-                      </span>
-                      {item.available && (
-                        <a
-                          href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour, je suis intéressé(e) par le sac "${item.name}" (${item.id})`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Button size="sm" className="bg-green-600 hover:bg-green-700">
-                            <MessageCircle className="w-4 h-4 mr-1" />
-                            Commander
-                          </Button>
-                        </a>
-                      )}
-                    </div>
+                    {item.available && (
+                      <a
+                        href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour, je suis intéressé(e) par le sac "${item.name}" (${item.id})`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                      >
+                        <Button className="w-full bg-green-600 hover:bg-green-700">
+                          <MessageCircle className="w-4 h-4 mr-2" />
+                          Commander sur WhatsApp
+                        </Button>
+                      </a>
+                    )}
                   </div>
                 </div>
               ))}
@@ -195,10 +178,10 @@ export default function ShopPage() {
           </div>
         </section>
 
-        {/* Sur Mesure CTA */}
-        <section className="py-16 bg-white">
+        {/* Sur Mesure CTA - Le carnet des créations */}
+        <section id="surmesure" className="py-16 bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span className="text-amber-600 font-semibold tracking-wider uppercase text-sm">
+            <span className="text-secondary-500 font-semibold tracking-wider uppercase text-sm">
               Le carnet des créations
             </span>
             <h2 className="font-serif text-3xl font-bold text-gray-900 mt-2 mb-4">
@@ -213,7 +196,7 @@ export default function ShopPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button size="lg" className="bg-rose-800 hover:bg-rose-900">
+              <Button size="lg" className="bg-primary-500 hover:bg-primary-700">
                 <MessageCircle className="w-5 h-5 mr-2" />
                 Créer mon sac sur mesure
               </Button>

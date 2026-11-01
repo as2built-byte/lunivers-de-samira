@@ -13,7 +13,7 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="font-display text-2xl font-bold text-primary-600">
+            <span className="font-serif text-2xl font-bold text-primary-500">
               L'univers de Samira
             </span>
           </Link>
@@ -22,26 +22,26 @@ export function Header() {
           <nav className="hidden md:flex items-center gap-8">
             <Link
               href="/shop"
-              className="text-gray-600 hover:text-primary-600 transition-colors font-medium"
+              className="text-gray-600 hover:text-primary-500 transition-colors font-medium"
             >
               Boutique
             </Link>
             <Link
               href="/formation"
-              className="text-gray-600 hover:text-primary-600 transition-colors font-medium flex items-center gap-1"
+              className="text-gray-600 hover:text-primary-500 transition-colors font-medium flex items-center gap-1"
             >
               <BookOpen className="w-4 h-4" />
               Formation
             </Link>
             <Link
               href="/about"
-              className="text-gray-600 hover:text-primary-600 transition-colors font-medium"
+              className="text-gray-600 hover:text-primary-500 transition-colors font-medium"
             >
               À propos
             </Link>
             <Link
               href="/contact"
-              className="text-gray-600 hover:text-primary-600 transition-colors font-medium"
+              className="text-gray-600 hover:text-primary-500 transition-colors font-medium"
             >
               Contact
             </Link>
@@ -51,7 +51,7 @@ export function Header() {
           <div className="flex items-center gap-4">
             {/* Recherche */}
             <button
-              className="p-2 text-gray-600 hover:text-primary-600 transition-colors"
+              className="p-2 text-gray-600 hover:text-primary-500 transition-colors"
               aria-label="Rechercher"
             >
               <Search className="w-5 h-5" />
@@ -60,7 +60,7 @@ export function Header() {
             {/* Panier */}
             <Link
               href="/cart"
-              className="relative p-2 text-gray-600 hover:text-primary-600 transition-colors"
+              className="relative p-2 text-gray-600 hover:text-primary-500 transition-colors"
               aria-label="Panier"
             >
               <ShoppingCart className="w-5 h-5" />
@@ -75,7 +75,7 @@ export function Header() {
             {isLoggedIn ? (
               <Link
                 href="/account"
-                className="p-2 text-gray-600 hover:text-primary-600 transition-colors"
+                className="p-2 text-gray-600 hover:text-primary-500 transition-colors"
                 aria-label="Mon compte"
               >
                 <User className="w-5 h-5" />
